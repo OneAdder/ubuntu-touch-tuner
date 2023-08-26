@@ -3,8 +3,8 @@
 A simple chromatic tuner for __Ubuntu Touch__ based on 
 [_PitchDetect_](https://github.com/cwilso/PitchDetect)
 and _QtWebEngine_.
-OpenStore link:
-[here](https://open-store.io/app/tuner.mikhail).
+
+[![OpenStore](https://open-store.io/badges/en_US.png)](https://open-store.io/app/tuner.mikhail)
 
 ## License
 
