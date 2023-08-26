@@ -1,6 +1,8 @@
 # Tuner
 
-A simple chromatic tuner
+A simple chromatic tuner for __Ubuntu Touch__ based on 
+[_PitchDetect_](https://github.com/cwilso/PitchDetect)
+and _QtWebEngine_.
 
 ## License
 
