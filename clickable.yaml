@@ -3,5 +3,12 @@ builder: pure
 kill: tuner
 framework: ubuntu-sdk-20.04
 
+ignore:
+  - .idea
+  - .clickable
+  - .git
+  - .gitignore
+  - .gitmodules
+
 install_data:
   PitchDetect/js/pitchdetect.js: js
