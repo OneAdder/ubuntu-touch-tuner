@@ -1,0 +1,15 @@
+{
+    "name": "tuner.mikhail",
+    "description": "A simple chromatic tuner",
+    "architecture": "@CLICK_ARCH@",
+    "title": "Tuner",
+    "hooks": {
+        "tuner": {
+            "apparmor": "tuner.apparmor",
+            "desktop":  "tuner.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "Mikhail Voronov <email@domain.org>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}

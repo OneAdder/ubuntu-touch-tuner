@@ -1,0 +1,7 @@
+clickable_minimum_required: 7.1.2
+builder: pure
+kill: tuner
+framework: ubuntu-sdk-20.04
+
+install_data:
+  PitchDetect/js/pitchdetect.js: js
