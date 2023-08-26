@@ -3,90 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <title>Chromatic Tuner</title>
-	<style>
-		body {
-			text-align: center;
-		}
-		#pitchWrapper {
-			padding-top: 10rem;
-			font-size: 5rem;
-		}
-		#noteWrapper {
-			padding: 20rem 0;
-			font-size: 25rem;
-		}
-		#detuneBar {
-			padding-bottom: 10rem;
-			font-size: 5rem;
-			font-family: monospace
-		}
-		#startButton{
-			font-size: 20rem;
-		}
-	</style>
-	<script src="../js/pitchdetect.js"></script>
-	<script>
-		// Custom update function for pitchdetect library
-		function updatePitch(time) {
-			var cycles = new Array;
-			analyser.getFloatTimeDomainData( buf );
-			var ac = autoCorrelate( buf, audioContext.sampleRate );
+    <style>
+        body {
+            text-align: center;
+        }
+        #pitchWrapper {
+            padding-top: 10rem;
+            font-size: 5rem;
+        }
+        #noteWrapper {
+            padding: 20rem 0;
+            font-size: 25rem;
+        }
+        #detuneBar {
+            padding-bottom: 10rem;
+            font-size: 5rem;
+            font-family: monospace
+        }
+        #startButton{
+            font-size: 20rem;
+        }
+    </style>
+    <script src="../js/pitchdetect.js"></script>
+    <script>
+        // Custom update function for pitchdetect library
+        function updatePitch(time) {
+            var cycles = new Array;
+            analyser.getFloatTimeDomainData( buf );
+            var ac = autoCorrelate( buf, audioContext.sampleRate );
 
-			detune_bar_left = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
-			detune_bar_right = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
-			detune_center = '|';
+            detune_bar_left = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
+            detune_bar_right = ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-'];
+            detune_center = '|';
 
-			if (ac != -1) {
-				detectorElem.className = "confident";
-				pitch = ac;
-				pitchElem.innerText = Math.round(pitch) + ' Hz';
-				var note =  noteFromPitch(pitch);
-				noteElem.innerHTML = noteStrings[note%12];
-				var detune = centsOffFromPitch( pitch, note );
+            if (ac != -1) {
+                detectorElem.className = "confident";
+                pitch = ac;
+                pitchElem.innerText = Math.round(pitch) + ' Hz';
+                var note =  noteFromPitch(pitch);
+                noteElem.innerHTML = noteStrings[note%12];
+                var detune = centsOffFromPitch( pitch, note );
 
-				if (detune == 0 ) {
-					detune_center = '*';
-				} else {
-					abs_detune = Math.abs(Math.round(detune / 5))
-					if (abs_detune == 0) {
-						detune_center = '*';
-					} else {
-						detune_pointer = abs_detune - 1;
-						if (detune < 0)
-							detune_bar_left[detune_bar_left.length - 1 - detune_pointer] = '*';
-						else
-							detune_bar_right[detune_pointer] = '*';
-					}
-				}
-			}
-			detune_bar = '<' + detune_bar_left.join('') + detune_center + detune_bar_right.join('') + '>'
-			document.getElementById('detuneBar').innerHTML = detune_bar;
+                if (detune == 0 ) {
+                    detune_center = '*';
+                } else {
+                    abs_detune = Math.abs(Math.round(detune / 5))
+                    if (abs_detune == 0) {
+                        detune_center = '*';
+                    } else {
+                        detune_pointer = abs_detune - 1;
+                        if (detune < 0)
+                            detune_bar_left[detune_bar_left.length - 1 - detune_pointer] = '*';
+                        else
+                            detune_bar_right[detune_pointer] = '*';
+                    }
+                }
+            }
+            detune_bar = '<' + detune_bar_left.join('') + detune_center + detune_bar_right.join('') + '>'
+            document.getElementById('detuneBar').innerHTML = detune_bar;
 
-			if (!window.requestAnimationFrame)
-				window.requestAnimationFrame = window.webkitRequestAnimationFrame;
-			rafID = window.requestAnimationFrame( updatePitch );
-		}
-	</script>
-	<script>
-		// Replace Start button with detected note in the center of the screen
-		function initOutputInterface() {
-			document.getElementById('note').innerHTML = '-';
-		}
-	</script>
+            if (!window.requestAnimationFrame)
+                window.requestAnimationFrame = window.webkitRequestAnimationFrame;
+            rafID = window.requestAnimationFrame( updatePitch );
+        }
+    </script>
+    <script>
+        // Replace Start button with detected note in the center of the screen
+        function initOutputInterface() {
+            document.getElementById('note').innerHTML = '-';
+        }
+    </script>
 </head>
 <body>
-	<div id="detector">
-		<div id="pitchWrapper"><span id="pitch"></span></div>
-		<div id="noteWrapper">
-			<span id="note">
-<!--				This get replaced with Note-->
-				<button onclick="initOutputInterface(); startPitchDetect();" id="startButton">
-					Start
-				</button>
-			</span>
-		</div>
-		<span id="detuneBar"></span>
-	</div>
+    <div id="detector">
+        <div id="pitchWrapper"><span id="pitch"></span></div>
+        <div id="noteWrapper">
+            <span id="note">
+<!--                This get replaced with Note-->
+                <button onclick="initOutputInterface(); startPitchDetect();" id="startButton">
+                    Start
+                </button>
+            </span>
+        </div>
+        <span id="detuneBar"></span>
+    </div>
 
 </body>
 </html>
