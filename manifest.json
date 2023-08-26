@@ -9,7 +9,7 @@
             "desktop":  "tuner.desktop"
         }
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "maintainer": "Mikhail Voronov <mikivo@list.ru>",
     "framework" : "@CLICK_FRAMEWORK@"
 }
